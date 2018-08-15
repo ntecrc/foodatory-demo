@@ -9,22 +9,18 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
-
-// Handlebars
-app.engine(
-  "handlebars",
-  exphbs({
-    defaultLayout: "main"
-  })
-);
-app.set("view engine", "handlebars");
 
 // Routes
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
+
+// Check if server is listening
+/*app.listen(PORT, function(){
+  console.log("Recipes finding App.listening on PORT " + PORT);
+});*/
 
 var syncOptions = { force: false };
 
